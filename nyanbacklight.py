@@ -27,7 +27,7 @@ max_brightness = int(max_brightness)
 percent = int(input("Enter percent : "))
 
 while percent > MAX_PERCENT or percent < MIN_PERCENT:
-	percent = int(input("Please enter the percent that is between 1-100 : "))
+	percent = int(input("Please enter the number that betweens 1-100 : "))
 
 result = percentToBrightness(percent, max_brightness)
 
