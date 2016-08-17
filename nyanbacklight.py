@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-# Python script to change brightness of the backlight screen.
-# Author : Chatchai Saratakij (CSaratakij)
 
 import math
 
