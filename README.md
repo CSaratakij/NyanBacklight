@@ -1,8 +1,12 @@
 # NyanBacklight
-Python script to change screen brightness in linux.
+- Python script to change screen brightness in linux.
 
 # Require
 - Python3
+
+# Getting Started
+- Execute and enter percentage in a prompt or use 1st commandline argument to set the backlight immediately,
+Example 'light 50'
 
 # Note
 - Tested with laptop that use intel card only. (intel hd graphics)

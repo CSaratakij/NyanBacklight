@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import sys
 import math
 
 FOLDER_PATH = "/sys/class/backlight/intel_backlight/"
@@ -15,25 +16,42 @@ def brightnessToPercent(brightness, maximum_brightness):
 def percentToBrightness(percent, maximum_brightness):
 	return (percent * maximum_brightness) / 100
 
-brightness_file = open(BRIGHTNESS_FILE_PATH, "r+")
-max_brightness_file = open(MAX_BRIGHTNESS_FILE_PATH)
+def main():
+    brightness_file = open(BRIGHTNESS_FILE_PATH, "r+")
+    max_brightness_file = open(MAX_BRIGHTNESS_FILE_PATH)
 
-brightness = brightness_file.read()
-max_brightness = max_brightness_file.read()
+    brightness = brightness_file.read()
+    max_brightness = max_brightness_file.read()
 
-brightness = int(brightness)
-max_brightness = int(max_brightness)
+    brightness = int(brightness)
+    max_brightness = int(max_brightness)
 
-percent = int(input("Enter percent : "))
+    percent = brightness
 
-while percent > MAX_PERCENT or percent < MIN_PERCENT:
-	percent = int(input("Please enter the number that betweens 1-100 : "))
+    if len(sys.argv) > 1:
+        percent = int(sys.argv[1])
 
-result = percentToBrightness(percent, max_brightness)
+        if percent < MIN_PERCENT:
+            print("Use {} brightness instead of {}.".format(MIN_PERCENT, percent))
+            percent = MIN_PERCENT
+        elif percent > MAX_PERCENT:
+            print("Use {} brightness instead of {}.".format(MAX_PERCENT, percent))
+            percent = MAX_PERCENT
+    else:
+        percent = int(input("Enter percent : "))
 
-actual_result = math.floor(result)
-brightness_file.write(str(actual_result))
+        while percent > MAX_PERCENT or percent < MIN_PERCENT:
+                percent = int(input("Please enter the number that betweens 1-100 : "))
 
-brightness_file.close()
-max_brightness_file.close()
+    result = percentToBrightness(percent, max_brightness)
+
+    actual_result = math.floor(result)
+    brightness_file.write(str(actual_result))
+
+    brightness_file.close()
+    max_brightness_file.close()
+
+
+if __name__ == "__main__":
+    main()
 
